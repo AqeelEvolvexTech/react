@@ -30,23 +30,26 @@ export const AboutPage = () => {
 
       <div className="space-y-8">
         <Card>
-          <CardHeader><CardTitle>Project Overview</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle>Project Overview</CardTitle>
+          </CardHeader>
           <CardContent>
             <p className="mb-4 text-gray-600 dark:text-gray-300">
-              A production-ready React application built with modern best practices.
-              It demonstrates professional architecture patterns including feature-based
-              organization, type-safe API layers, context-based state management, and
-              component-driven UI design.
+              A production-ready React application built with modern best practices. It demonstrates professional
+              architecture patterns including feature-based organization, type-safe API layers, context-based state
+              management, and component-driven UI design.
             </p>
             <p className="text-gray-600 dark:text-gray-300">
-              Structured to be scalable, maintainable, and easy to extend. Each concern
-              is separated into its own folder with clear boundaries.
+              Structured to be scalable, maintainable, and easy to extend. Each concern is separated into its own folder
+              with clear boundaries.
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader><CardTitle>Technology Stack</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle>Technology Stack</CardTitle>
+          </CardHeader>
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-2">
               {techStack.map((tech) => (
@@ -54,7 +57,9 @@ export const AboutPage = () => {
                   <div className="size-2 rounded-full bg-primary-500" />
                   <div>
                     <p className="font-medium text-gray-900 dark:text-gray-100">{tech.name}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{tech.role} — {tech.description}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {tech.role} — {tech.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -63,12 +68,16 @@ export const AboutPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><CardTitle>Architecture</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle>Architecture</CardTitle>
+          </CardHeader>
           <CardContent>
             <div className="space-y-2">
               {architectureLayers.map((layer) => (
                 <div key={layer.folder} className="flex items-start gap-3 rounded-lg bg-gray-50 p-3 dark:bg-gray-700">
-                  <code className="rounded bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-700 dark:bg-primary-950 dark:text-primary-300">{layer.folder}</code>
+                  <code className="rounded bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-700 dark:bg-primary-950 dark:text-primary-300">
+                    {layer.folder}
+                  </code>
                   <p className="text-sm text-gray-600 dark:text-gray-300">{layer.purpose}</p>
                 </div>
               ))}
@@ -77,19 +86,41 @@ export const AboutPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><CardTitle>Key Patterns</CardTitle></CardHeader>
+          <CardHeader>
+            <CardTitle>Key Patterns</CardTitle>
+          </CardHeader>
           <CardContent>
             <ul className="list-disc space-y-2 pl-6 text-gray-600 dark:text-gray-300">
-              <li><strong>Arrow functions</strong> — All components use consistent arrow function syntax</li>
-              <li><strong>Default + named exports</strong> — Every file supports both import styles</li>
-              <li><strong>Context + hooks</strong> — Clean separation of state and consumption</li>
-              <li><strong>Mock API layer</strong> — Swappable service layer for easy backend integration</li>
-              <li><strong>Protected routes</strong> — Auth guard with redirect and loading states</li>
-              <li><strong>Dark mode</strong> — System preference detection with manual toggle</li>
-              <li><strong>AbortController</strong> — Proper cleanup for async operations</li>
-              <li><strong>Tailwind CSS v4</strong> — Utility-first styling with Vite plugin</li>
-              <li><strong>Dynamic icon system</strong> — SVGs auto-discovered via import.meta.glob</li>
-              <li><strong>ErrorBoundary</strong> — Graceful error handling for the entire app</li>
+              <li>
+                <strong>Arrow functions</strong> — All components use consistent arrow function syntax
+              </li>
+              <li>
+                <strong>Default + named exports</strong> — Every file supports both import styles
+              </li>
+              <li>
+                <strong>Context + hooks</strong> — Clean separation of state and consumption
+              </li>
+              <li>
+                <strong>Mock API layer</strong> — Swappable service layer for easy backend integration
+              </li>
+              <li>
+                <strong>Protected routes</strong> — Auth guard with redirect and loading states
+              </li>
+              <li>
+                <strong>Dark mode</strong> — System preference detection with manual toggle
+              </li>
+              <li>
+                <strong>AbortController</strong> — Proper cleanup for async operations
+              </li>
+              <li>
+                <strong>Tailwind CSS v4</strong> — Utility-first styling with Vite plugin
+              </li>
+              <li>
+                <strong>Dynamic icon system</strong> — SVGs auto-discovered via import.meta.glob
+              </li>
+              <li>
+                <strong>ErrorBoundary</strong> — Graceful error handling for the entire app
+              </li>
             </ul>
           </CardContent>
         </Card>
