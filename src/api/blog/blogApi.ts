@@ -1,17 +1,6 @@
 import type { BlogListParams, BlogPost } from '@/types/blog.types'
 
-const TITLES = [
-  'Getting Started with React',
-  'Understanding TypeScript',
-  'State Management Patterns',
-  'Routing in React',
-  'Component Design',
-  'Performance Optimization',
-  'Testing Strategies',
-  'Deployment Guide',
-  'CSS with Tailwind',
-  'API Integration',
-]
+const TITLES = ['Getting Started with React', 'Understanding TypeScript', 'State Management Patterns', 'Routing in React', 'Component Design', 'Performance Optimization', 'Testing Strategies', 'Deployment Guide', 'CSS with Tailwind', 'API Integration']
 const AUTHORS = ['Jane Doe', 'John Smith', 'Alice Johnson', 'Bob Williams']
 
 const MOCK_BLOGS: BlogPost[] = Array.from({ length: 25 }, (_, i) => ({

@@ -12,9 +12,7 @@ export const DashboardPage = () => {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
-          <CardHeader>
-            <CardTitle>Profile</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle>Profile</CardTitle></CardHeader>
           <CardContent>
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between">
@@ -34,26 +32,16 @@ export const DashboardPage = () => {
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle>Quick Actions</CardTitle></CardHeader>
           <CardContent className="space-y-3">
-            <Button variant="secondary" className="w-full justify-start">
-              Edit Profile
-            </Button>
-            <Button variant="secondary" className="w-full justify-start">
-              Settings
-            </Button>
-            <Button variant="secondary" className="w-full justify-start">
-              View Blogs
-            </Button>
+            <Button variant="secondary" className="w-full justify-start">Edit Profile</Button>
+            <Button variant="secondary" className="w-full justify-start">Settings</Button>
+            <Button variant="secondary" className="w-full justify-start">View Blogs</Button>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle>Recent Activity</CardTitle></CardHeader>
           <CardContent>
             <p className="text-sm text-gray-600 dark:text-gray-300">
               Personal dashboard. More features coming as the application grows.

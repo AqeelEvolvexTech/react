@@ -14,20 +14,12 @@ const navLinks = [
   { to: ROUTES.CONTACT, label: 'Contact' },
 ]
 
-const desktopLink = ({ isActive }: { isActive: boolean }) =>
+const linkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
     'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
     isActive
       ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300'
       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100',
-  )
-
-const mobileLink = ({ isActive }: { isActive: boolean }) =>
-  cn(
-    'whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-    isActive
-      ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300'
-      : 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800',
   )
 
 export const Navbar = () => {
@@ -40,8 +32,6 @@ export const Navbar = () => {
     navigate(ROUTES.HOME)
   }
 
-  const allLinks = isAuthenticated ? [...navLinks, { to: ROUTES.DASHBOARD, label: 'Dashboard' }] : navLinks
-
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -50,11 +40,16 @@ export const Navbar = () => {
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
-          {allLinks.map((link) => (
-            <NavLink key={link.to} to={link.to} className={desktopLink}>
+          {navLinks.map((link) => (
+            <NavLink key={link.to} to={link.to} className={linkClass}>
               {link.label}
             </NavLink>
           ))}
+          {isAuthenticated && (
+            <NavLink to={ROUTES.DASHBOARD} className={linkClass}>
+              Dashboard
+            </NavLink>
+          )}
         </div>
 
         <div className="flex items-center gap-2">
@@ -79,11 +74,22 @@ export const Navbar = () => {
       </nav>
 
       <div className="flex items-center gap-1 overflow-x-auto border-t border-gray-100 px-4 py-2 dark:border-gray-800 md:hidden">
-        {allLinks.map((link) => (
-          <NavLink key={link.to} to={link.to} className={mobileLink}>
+        {navLinks.map((link) => (
+          <NavLink key={link.to} to={link.to} className={({ isActive }) =>
+            cn('whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
+              isActive ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800')
+          }>
             {link.label}
           </NavLink>
         ))}
+        {isAuthenticated && (
+          <NavLink to={ROUTES.DASHBOARD} className={({ isActive }) =>
+            cn('whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
+              isActive ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800')
+          }>
+            Dashboard
+          </NavLink>
+        )}
       </div>
     </header>
   )

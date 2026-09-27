@@ -5,7 +5,9 @@ import ThemeProvider from '@/contexts/ThemeContext'
 export const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
     <ThemeProvider>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        {children}
+      </AuthProvider>
     </ThemeProvider>
   )
 }

@@ -6,18 +6,15 @@ const modules = import.meta.glob<React.FC<SVGProps<SVGSVGElement>>>('@/**/*.svg'
   import: 'default',
 })
 
-const icons = Object.entries(modules).reduce<Record<string, React.FC<SVGProps<SVGSVGElement>>>>(
-  (acc, [path, component]) => {
-    const parts = path.split('/')
-    const fileName = parts.pop()?.replace('.svg', '') ?? ''
-    const folder = parts.pop() ?? ''
-    const fullName = folder ? `${folder}/${fileName}` : fileName
-    acc[fullName] = component
-    acc[fileName] = component
-    return acc
-  },
-  {},
-)
+const icons = Object.entries(modules).reduce<Record<string, React.FC<SVGProps<SVGSVGElement>>>>((acc, [path, component]) => {
+  const parts = path.split('/')
+  const fileName = parts.pop()?.replace('.svg', '') ?? ''
+  const folder = parts.pop() ?? ''
+  const fullName = folder ? `${folder}/${fileName}` : fileName
+  acc[fullName] = component
+  acc[fileName] = component
+  return acc
+}, {})
 
 export type IconName = keyof typeof icons
 

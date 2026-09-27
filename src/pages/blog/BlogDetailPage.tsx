@@ -1,72 +1,62 @@
-import { type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Link, useParams } from 'react-router'
 import { getBlogById } from '@/api/blog/blogApi'
-import useApi from '@/hooks/useApi'
 import Spinner from '@/components/ui/Spinner'
 import Alert from '@/components/ui/Alert'
 import Button from '@/components/ui/Button'
-import Icon from '@/components/ui/Icon'
 import ROUTES from '@/config/constants'
 import type { BlogPost } from '@/types/blog.types'
+import Icon from '@/components/ui/Icon'
 
 const renderContent = (content: string): ReactNode =>
   content.split('\n').map((p, i) => {
-    if (p.startsWith('# '))
-      return (
-        <h1 key={i} className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
-          {p.slice(2)}
-        </h1>
-      )
-    if (p.startsWith('## '))
-      return (
-        <h2 key={i} className="mb-3 mt-6 text-xl font-semibold text-gray-900 dark:text-gray-100">
-          {p.slice(3)}
-        </h2>
-      )
-    if (p.startsWith('- '))
-      return (
-        <ul key={i} className="mb-4 list-disc pl-6 text-gray-700 dark:text-gray-300">
-          <li>{p.slice(2)}</li>
-        </ul>
-      )
-    if (p.trim())
-      return (
-        <p key={i} className="mb-4 text-gray-700 dark:text-gray-300">
-          {p}
-        </p>
-      )
+    if (p.startsWith('# ')) return <h1 key={i} className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">{p.slice(2)}</h1>
+    if (p.startsWith('## ')) return <h2 key={i} className="mb-3 mt-6 text-xl font-semibold text-gray-900 dark:text-gray-100">{p.slice(3)}</h2>
+    if (p.startsWith('- ')) return <ul key={i} className="mb-4 list-disc pl-6 text-gray-700 dark:text-gray-300"><li>{p.slice(2)}</li></ul>
+    if (p.trim()) return <p key={i} className="mb-4 text-gray-700 dark:text-gray-300">{p}</p>
     return null
   })
 
 export const BlogDetailPage = () => {
   const { id } = useParams<{ id: string }>()
-  const { data: post, isLoading, error } = useApi<BlogPost | null>(() => getBlogById(Number(id)), [id])
+  const [post, setPost] = useState<BlogPost | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center py-12">
-        <Spinner size="lg" />
-      </div>
-    )
+  useEffect(() => {
+    if (!id) return
 
-  if (error)
-    return (
-      <div className="space-y-4">
-        <Alert variant="error">{error}</Alert>
-        <Button variant="secondary" onClick={() => window.history.back()}>
-          Go Back
-        </Button>
-      </div>
-    )
+    const controller = new AbortController()
 
-  if (!post) return <Alert variant="info">Blog post not found.</Alert>
+    const fetchPost = async () => {
+      setIsLoading(true)
+      setError('')
+      try {
+        const result = await getBlogById(Number(id))
+        if (!controller.signal.aborted) {
+          if (result) setPost(result)
+          else setError('Blog post not found')
+        }
+      } catch (err) {
+        if (!controller.signal.aborted) setError(err instanceof Error ? err.message : 'Failed to load blog')
+      } finally {
+        if (!controller.signal.aborted) setIsLoading(false)
+      }
+    }
+
+    fetchPost()
+    return () => controller.abort()
+  }, [id])
+
+  if (isLoading) return <div className="flex justify-center py-12"><Spinner size="lg" /></div>
+
+  if (error) return <div className="space-y-4"><Alert variant="error">{error}</Alert><Button variant="secondary" onClick={() => window.history.back()}>Go Back</Button></div>
+
+  if (!post) return null
 
   return (
     <article>
-      <Link
-        to={ROUTES.BLOGS}
-        className="mb-4 inline-flex items-center gap-1 text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-      >
+      <Link to={ROUTES.BLOGS} className="mb-4 inline-flex items-center gap-1 text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">
         <Icon name="arrow-left" className="size-4" />
         Back to Blogs
       </Link>

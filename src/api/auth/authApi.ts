@@ -13,7 +13,9 @@ const generateToken = (id: string, email: string): string =>
 export const loginUser = async (credentials: LoginCredentials): Promise<AuthResponse> => {
   await delay(800)
 
-  const found = MOCK_USERS.find((u) => u.email === credentials.email && u.password === credentials.password)
+  const found = MOCK_USERS.find(
+    (u) => u.email === credentials.email && u.password === credentials.password,
+  )
 
   if (!found) {
     throw new Error('Invalid email or password')

@@ -42,20 +42,19 @@ export const HomePage = () => {
     <div className="space-y-16">
       <section className="py-12 text-center sm:py-20">
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl dark:text-gray-100">
-          Welcome to <span className="text-primary-600 dark:text-primary-400">ReactApp</span>
+          Welcome to{' '}
+          <span className="text-primary-600 dark:text-primary-400">ReactApp</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-          A professionally architected React application with TypeScript, Tailwind CSS, React Router, authentication,
-          and modern best practices.
+          A professionally architected React application with TypeScript, Tailwind CSS,
+          React Router, authentication, and modern best practices.
         </p>
         <div className="mt-8 flex items-center justify-center gap-4">
           <Link to={ROUTES.BLOGS}>
             <Button size="lg">Explore Blogs</Button>
           </Link>
           <Link to={ROUTES.ABOUT}>
-            <Button variant="secondary" size="lg">
-              Learn More
-            </Button>
+            <Button variant="secondary" size="lg">Learn More</Button>
           </Link>
         </div>
       </section>
