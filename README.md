@@ -117,10 +117,10 @@ src/
 
 ## Demo Credentials
 
-```
-Email: admin@example.com
-Password: 123456
-```
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@example.com | 123456 |
+| User | user@example.com | 123456 |
 
 ## Scripts
 
